@@ -1,0 +1,375 @@
+﻿
+@{
+    List<string> ChiTietKhoaHoc = (List<string>)ViewBag.ChiTietKhoaHoc;
+    List<WebApplication1.Models.Session> DanhSachBaiHoc = (List<WebApplication1.Models.Session>)ViewBag.DanhSachBaiHoc;
+    List<WebApplication1.Models.Review> LstReview = (List<WebApplication1.Models.Review>)ViewBag.LstReview;
+    bool checkJoin = ViewBag.checkJoin;
+    var user = Session["User"] as WebApplication1.Models.User;
+    ViewBag.Title = ChiTietKhoaHoc[0];
+    Layout = "~/Views/Shared/SharedLayout.cshtml";
+}
+
+<!-- Header Start -->
+<div class="container-fluid page-header" style="margin-bottom: 90px;">
+    <div class="container">
+        <div class="d-flex flex-column justify-content-center" style="min-height: 300px">
+            <h3 class="display-4 text-white text-uppercase">khóa học</h3>
+            <div class="d-inline-flex text-white">
+                <p class="m-0 text-uppercase"><a class="text-white" href="~/Home">trang chủ</a></p>
+                <i class="fa fa-angle-double-right pt-1 px-3"></i>
+                <p class="m-0 text-uppercase"><a class="text-white" href="~/Course">khóa học</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Header End -->
+<!-- Main Start -->
+<main>
+
+    <!-- ====== start tc-main-post-style1 ====== -->
+    <section class="tc-main-post-style1 pb-60">
+        <div class="container">
+            <div class="tc-main-post-title pt-40 pb-40">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h2 class="title">@ChiTietKhoaHoc[0]</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="meta-nav pt-30 pb-30 border-top border-1 brd-gray">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="author-side color-666 fsz-13px">
+                            <div class="author me-40 d-flex d-lg-inline-flex align-items-center">
+                                <span>Giảng Viên</span>
+                                <span class="text-decoration-underline text-primary ms-1" style=" padding-left: 5px">@ChiTietKhoaHoc[3]</span>
+                            </div>
+                            <span class="me-40">
+                                <a style=" padding-left: 15px"><i class="fa fa-envelope" aria-hidden="true" style=" padding-right: 8px"></i>@ChiTietKhoaHoc[7]</a>
+                            </span>
+                            <span class="">
+                                <a style=" padding-left: 15px"> <i class="fa fa-phone" aria-hidden="true" style=" padding-right: 5px"></i> @ChiTietKhoaHoc[8]</a>
+                            </span>
+                            <span style=" padding-left: 15px">Đăng ngày</span>
+                            <span class="text-decoration-underline text-primary ms-1" style=" padding-left: 5px">@ChiTietKhoaHoc[2]</span>
+                        </div>
+                    </div>
+                    @*<div class="col-lg-6 text-lg-end">
+                            <div class="links-side color-000 fsz-13px">
+                                <a href="#" class="me-40"><i class="la la-link me-1"></i> Copy Link</a>
+                                <a href="#" class="me-40"><i class="la la-bookmark me-1"></i> Bookmark</a>
+                                <a href="#"><i class="la la-exclamation-triangle me-1"></i> Report</a>
+                            </div>
+                        </div>*@
+                </div>
+            </div>
+            <div class="tc-main-post-img img-cover mb-50">
+                <img src="~/Assets/img/Course/@ChiTietKhoaHoc[1]" style=" border-radius: 50px" alt="">
+            </div>
+            <div class="tc-main-post-content color-000">
+                <div class="row">
+                    <div class="col-lg-2">
+                        @*<div class="sharing">
+                                <p class="text-uppercase mb-20">Share</p>
+                                <div class="share-icons">
+                                    <a href="#"> <i class="la la-twitter"></i> </a>
+                                    <a href="#"> <i class="la la-facebook-f"></i> </a>
+                                    <a href="#"> <i class="la la-instagram"></i> </a>
+                                    <a href="#"> <i class="la la-youtube"></i> </a>
+                                    <a href="#"> <i class="la la-spotify"></i> </a>
+                                </div>
+                            </div>*@
+                    </div>
+                    <div class="col-lg-10">
+                        @*<h4 class="sub-title sm-content-width">
+                                This intimate, fearless account of the <span class="color-main">Canadian</span> author’s relationship with her traumatised, free-thinking mother leaves you rooting for both of them.
+                            </h4>*@
+                        <p class="info-text sm-content-width mt-40">
+                            @ChiTietKhoaHoc[6]
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ====== end tc-main-post-style ====== -->
+    <!-- ====== start banner18 ====== -->
+    <section class="banner18">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    @*<div class="content border-1 border-top border-bottom brd-gray pt-50 pb-50">
+                            <a href="#" class="d-block img-cover">
+                                <img src="" alt="">
+                            </a>
+                        </div>*@
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ====== end banner18 ====== -->
+    <!-- ====== start video content ====== -->
+    <section class="tc-main-post-style1 pt-60 pb-60">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="tc-main-post-content">
+                        <h4 class="sub-title mb-40">
+                            Chi Tiết khóa học
+                        </h4>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Số thứ tự</th>
+                                    <th>Bài giảng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ int i = 1;
+                                    foreach (var item in DanhSachBaiHoc)
+                                    {
+                                        <tr>
+                                            <td>@i</td>
+                                            <td>
+                                                @if (user != null)
+                                                {
+                                                    <a href=" @Url.Action("BaiGiang", "Course", new {ID =item.ID})">@item.Titles</a>
+                                                }
+                                                else
+                                                {
+                                                    <p>@item.Titles</p>
+                                                }
+                                            </td>
+                                        </tr>
+                                        i++;
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ====== end video content ====== -->
+    <!-- ====== start next prev post slider ====== -->
+    <!-- ====== end next prev post slider ====== -->
+    <!-- ====== start author info ====== -->
+    <!-- ====== end author info ====== -->
+    <!-- ====== start another posts ====== -->
+    <!-- ====== start another posts ====== -->
+    <!-- ====== start comments ====== -->
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-6">
+                <div class="contact-form">
+                    <h3>Đánh giá của bạn</h3>
+                    @if (user != null)
+                    {
+                        using (Html.BeginForm("AddReview", "Course", FormMethod.Post))
+                        {
+                            <form>
+                                    <div class="center">
+                                        <div class="stars">
+                                            <input type="radio" id="five" name="Rate" value="5">
+                                            <label for="five"></label>
+                                            <input type="radio" id="four" name="Rate" value="4">
+                                            <label for="four"></label>
+                                            <input type="radio" id="three" name="Rate" value="3">
+                                            <label for="three"></label>
+                                            <input type="radio" id="two" name="Rate" value="2">
+                                            <label for="two"></label>
+                                            <input type="radio" id="one" name="Rate" value="1">
+                                            <label for="one"></label>
+                                            <span class="result"></span>
+                                        </div>
+                                    </div>
+                                <div class="form-group mb-30">
+                                    <textarea class="form-control rounded-0 fsz-12px p-3" placeholder="Nhập đánh giá của bạn..." name="Description" required></textarea>
+                                </div>
+                                <input type="hidden" name="IDCourse" value="@ChiTietKhoaHoc[4]">
+                                <input type="hidden" name="IDUser" value="@user.ID">
+                                <input type="hidden" name="Date" value="@DateTime.Now" />
+                                <input type="submit" value="Gửi đánh giá" class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" />
+                            </form>
+                        }
+                    }
+                    else
+                    {
+                        <div class="col-md-12">
+                            <div class="col-md-12">
+                                <p>Bạn vui lòng đăng nhập để đánh giá khóa học</p>
+                            </div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8">
+                                <a href="~/Home/LOGIN" class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block">Đăng nhập</a>
+                            </div>
+                        </div>
+                    }
+
+                </div><!-- .contact-form -->
+            </div>
+
+
+            <div class="col-12 col-lg-6">
+                <div class="contact-info" style="padding-left: 15px">
+                    <h3>Đánh giá khóa học (@LstReview.Count)</h3>
+                    @if (LstReview.Count == 0)
+                    {
+                        <div class="col-md-12">
+                            <p>Khóa học chưa có đánh giá</p>
+                        </div>
+                    }
+                    else
+                    {
+                        foreach (var item in LstReview.Take(3))
+                        {
+                            <div class="form-group mb-30">
+                                <ul class="p-0 m-0">
+                                    <li style="list-style: none"><span><i class="fa fa-user" style="margin-right: 5px"></i></span>@item.User.FullName</li>
+                                    <li style="list-style: none"><span><i class="fa fa-clock-o" style="margin-right: 5px"></i></span>@item.Date.Value.ToString("hh:mm")</li>
+                                    <li style="list-style: none"><span><i class="fa fa-calendar-o" style="margin-right: 5px"></i></span>@item.Date.Value.ToString("dd-MM-yyyy")</li>
+                                    <li style="list-style: none"><span><i class="fa fa-star" aria-hidden="true" style="margin-right: 5px"></i><i class="bi bi-star-fill"></i></span>@item.Rate</li>
+                                </ul>
+                                <p>@item.Description</p>
+                            </div>
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<section class="tc-single-post-comments">
+            <div class="container">
+                <div class="comments-content pt-50 pb-50 border-1 border-top border-dark">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="content">
+                                <div class="comments-filter">
+                                    <div class="row align-items-center">
+                                        <div class="col-4">
+                                            <p class="text-uppercase">3 comments</p>
+                                        </div>
+                                        <div class="col-8 text-end">
+                                            <div class="from-group">
+                                                <label for="">Sort by : </label>
+                                                <select name="" id="" class="form-select">
+                                                    <option value="">Most liked</option>
+                                                    <option value="">Most views</option>
+                                                    <option value="">Most rated</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="comments-cards">
+                                    <div class="comment-replay-cont border-bottom border-1 brd-gray pb-40 pt-40">
+                                        <div class="d-flex comment-cont">
+                                            <div class="icon-60 rounded-circle img-cover overflow-hidden me-3 flex-shrink-0">
+                                                <img src="" alt="">
+                                            </div>
+                                            <div class="inf w-100">
+                                                <div class="title d-flex justify-content-between">
+                                                    <h6 class="fw-bold fsz-14px">David Bowie</h6>
+                                                    <span class="time fsz-12px text-uppercase color-999">
+                                                        3 hours ago
+                                                    </span>
+                                                </div>
+                                                <div class="text color-666 fsz-12px mt-10">
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Atume nusaate staman utra phone limo sumeria
+                                                </div>
+                                                <a href="#" class="butn border border-1 mt-20 py-2 px-3">
+                                                    <span class="fsz-11px"> replay </span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex comment-replay ps-5 mt-30 ms-4">
+                                            <div class="icon-40 rounded-circle img-cover overflow-hidden me-3 flex-shrink-0">
+                                                <img src="" alt="">
+                                            </div>
+                                            <div class="inf w-100">
+                                                <div class="title d-flex justify-content-between">
+                                                    <h6 class="fw-bold fsz-14px">Logan Cee</h6>
+                                                    <span class="time fsz-12px text-uppercase color-999">
+                                                        2 dayes ago
+                                                    </span>
+                                                </div>
+                                                <div class="text color-666 fsz-12px mt-10">
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Atume nusaate staman utra phone limo sumeria
+                                                </div>
+                                                <a href="#" class="butn border border-1 mt-20 py-2 px-3">
+                                                    <span class="fsz-11px"> replay </span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="comment-replay-cont pb-40 pt-40 border-bottom border-1 brd-gray">
+                                        <div class="d-flex comment-cont">
+                                            <div class="icon-60 rounded-circle img-cover overflow-hidden me-3 flex-shrink-0">
+                                                <img src="" alt="">
+                                            </div>
+                                            <div class="inf w-100">
+                                                <div class="title d-flex justify-content-between">
+                                                    <h6 class="fw-bold fsz-14px">Luis Diaz</h6>
+                                                    <span class="time fsz-12px text-uppercase color-999">
+                                                        December 25, 2022
+                                                    </span>
+                                                </div>
+                                                <div class="text color-000 fsz-12px mt-10">
+                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                                                </div>
+                                                <a href="#" class="butn border border-1 mt-20 py-2 px-3">
+                                                    <span class="fsz-11px"> replay </span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <form class="comment-form d-block pt-30">
+                                    <p class="text-uppercase mb-30">Leave A Comment</p>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="form-group mb-30">
+                                                <textarea class="form-control rounded-0 fsz-12px p-3" name="comment" rows="6" placeholder="Write your comment here"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group mb-4 mb-lg-0">
+                                                <input type="text" class="form-control fsz-12px rounded-0 p-3" name="name" placeholder="Your Name *">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control fsz-12px rounded-0 p-3" name="email" placeholder="Your Email *">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="form-check mt-20">
+                                                <input class="form-check-input" name="checkbox" type="checkbox" value="" id="flexCheckDefault">
+                                                <label class="form-check-label fsz-12px" for="flexCheckDefault">
+                                                    Save my name &amp; email in this browser for next time I comment
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" class="btn bg-main text-white rounded-0 mt-40">
+                                                <span class="fsz-11px">Submit Comment </span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>*@
+    <!-- ====== end comments ====== -->
+    <!-- ====== start modals ====== -->
+    <!-- ====== end modals ====== -->
+
+</main>
+<!-- Main End -->
+

@@ -1,0 +1,70 @@
+﻿@model IEnumerable<WebApplication1.Models.Course>
+
+@{
+    ViewBag.Title = "Danh sách khóa học";
+    Layout = "~/Areas/GiangVien/Views/Shared/SharedLayoutTeacher.cshtml";
+}
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Danh sách khóa học</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                        <div class="panel-heading">
+
+                            <a href="~/GiangVien/Course/AddCourse" class="btn btn-success"><i class="fa fa-plus"></i>Thêm mới</a>
+                        </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <thead>
+                                    <tr>
+                                        <th>Số thứ tự</th>
+                                        <th>Tiêu đề khóa học</th>>
+                                        <th>Hình ảnh</th>
+                                        <th>Số học viên</th>
+                                        <th>Số bài giảng</th>
+                                        <th>Ngày tạo</th>
+                                        <th>Phân loại</th>
+                                        <th>Xem chi tiết</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{ int i = 1;
+                                        foreach (var item in Model)
+                                        {
+                                            <tr class="odd gradeX">
+                                                <td>@i</td>
+                                                <td>@item.Titles</td>
+                                                <td><img src="~/Assets/img/Course/@item.Images" width="100px" /></td>
+                                                <td><a href="~/GiangVien/Course/HocVien?id=@item.ID"> @item.Joins.Count(x => x.IDCourse == item.ID)</a></td>
+                                                <td><a href="~/GiangVien/Session/Index?id=@item.ID">@item.Sessions.Count(x => x.courseID == item.ID)</a></td>
+                                                <td>@item.Date.Value.ToString("dd-MM-yyyy")</td>
+                                                <td>@item.Category.CategoryName</td>
+                                                <td style="text-align:center; vertical-align: middle;" class="center">
+                                                    <button class="btn btn-default btnEdit" data-id="@item.ID" title="Chi tiết khóa học" onclick="location.href= '/GiangVien/Course/Update?id=@item.ID'"><i class="fa fa-edit fa-fw"></i></button>
+                                                    <button class="btn btn-info btnDelete" data-id="@item.ID" title="Xóa khóa học" onclick="if (confirm('Bạn có chắc chắn muốn xóa khóa học này không?')) { location.href= '/GiangVien/Course/Delete?id=@item.ID ' }">
+                                                        <i class="fa fa-close fa-fw"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            i++;
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

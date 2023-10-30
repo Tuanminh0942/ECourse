@@ -1,0 +1,185 @@
+﻿@model WebApplication1.Models.Essay
+@{
+    WebApplication1.Models.Session ChiTietBaiGiang = (WebApplication1.Models.Session)ViewBag.ChiTietBaiGiang;
+    WebApplication1.Models.Course KhoaHoc = (WebApplication1.Models.Course)ViewBag.KhoaHoc;
+    List<WebApplication1.Models.Essay> BaiTap = (List<WebApplication1.Models.Essay>)ViewBag.Homework;
+    ViewBag.Title = ChiTietBaiGiang.Titles;
+    Layout = "~/Views/Shared/SharedLayout.cshtml";
+    var user = Session["User"] as WebApplication1.Models.User;
+}
+<!-- Header Start -->
+<div class="container-fluid page-header" style="margin-bottom: 90px;">
+    <div class="container">
+        <div class="d-flex flex-column justify-content-center" style="min-height: 300px">
+            <h3 class="display-4 text-white text-uppercase">BÀI GIẢNG</h3>
+            <div class="d-inline-flex text-white">
+                <p class="m-0 text-uppercase"><a class="text-white" href="~/Home">TRANG CHỦ</a></p>
+                <i class="fa fa-angle-double-right pt-1 px-3"></i>
+                <p class="m-0 text-uppercase"><a class="text-white" href="~/Course">KHÓA HỌC</a></p>
+                <i class="fa fa-angle-double-right pt-1 px-3"></i>
+                <p class="m-0 text-uppercase" ><a class="text-white" href="@Url.Action("Details", "Course", new {ID = KhoaHoc.ID, IDTeacher = KhoaHoc.IDTeacher} )">@KhoaHoc.Titles</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Header End -->
+
+<!-- Main Start -->
+<main>
+
+    <!-- ====== start tc-main-post-style1 ====== -->
+    <section class="tc-main-post-style1 pb-60">
+        <div class="container">
+            <div class="tc-main-post-title pt-40 pb-40">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h2 class="title">@ChiTietBaiGiang.Titles</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="meta-nav pt-30 pb-30 border-top border-1 brd-gray">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="author-side color-666 fsz-13px">
+                            <div class="author me-40 d-flex d-lg-inline-flex align-items-center">
+                                <span>Giảng viên</span>
+                                <span class="text-decoration-underline text-primary ms-1" style=" padding-left: 5px">@ChiTietBaiGiang.Course.Teacher.FullName</span>
+                            </div>
+                            <span class="me-40">
+                                <a style=" padding-left: 15px"><i class="fa fa-envelope" aria-hidden="true" style=" padding-right: 8px"></i>@ChiTietBaiGiang.Course.Teacher.Email</a>
+                            </span>
+                            <span class="">
+                                <a style=" padding-left: 15px"> <i class="fa fa-phone" aria-hidden="true" style=" padding-right: 5px"></i> @ChiTietBaiGiang.Course.Teacher.Phone</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ====== end tc-main-post-style ====== -->
+    <!-- ====== start banner18 ====== -->
+    <!-- ====== end banner18 ====== -->
+    <!-- ====== start video content ====== -->
+    <section class="tc-main-post-style1 pt-60 pb-60">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="tc-main-post-content">
+                        <h4 class="sub-title mb-40">
+                            Chi Tiết Bài Học
+                        </h4>
+                        <div class="single-post-wrap">
+                            <iframe width="920" height="473" src=@ChiTietBaiGiang.Link title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <h4 class="sub-title sm-content-width mt-40">
+                            Lời mở đầu
+                        </h4>
+                        <div class="col-lg-12">
+                            <p class="info-text sm-content-width mt-40">
+                                @ChiTietBaiGiang.Description
+                            </p>
+                        </div>
+                        <div class="single-course-wrap">
+                            <div class="single-course-cont-section">
+                                <h4 class="sub-title mb-40">
+                                    Bài tập về nhà
+                                </h4>
+                                <p>Tải file bài tập: <a href="/course/downloadfile?file=@ChiTietBaiGiang.File">@ChiTietBaiGiang.File</a></p>
+                            </div>  
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ====== end video content ====== -->
+    <!-- ====== start next prev post slider ====== -->
+    <!-- ====== end next prev post slider ====== -->
+    <!-- ====== start author info ====== -->
+    <!-- ====== end author info ====== -->
+    <!-- ====== start another posts ====== -->
+    <!-- ====== start another posts ====== -->
+    <!-- ====== start comments ====== -->
+    <section class="tc-single-post-comments">
+        <div class="container">
+            <div class="comments-content pt-50 pb-50 border-1 border-top border-dark">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="content">
+                            <div class="comments-filter">
+                                <div class="row align-items-center">
+                                    <div class="col-4">
+                                        <p class="text-uppercase">Bài tập về nhà</p>
+                                    </div>
+                                </div>
+                            </div>
+                            @foreach (var item in BaiTap)
+                            {
+                                <div class="comments-cards">
+                                    <div class="comment-replay-cont border-bottom border-1 brd-gray pb-40 pt-40">
+                                        <div class="d-flex comment-cont">
+                                            <div class="inf w-100">
+                                                <div class="title d-flex justify-content-between">
+                                                    <h6 class="fw-bold fsz-14px">Học viên: @item.User.FullName</h6>
+                                                    <span class="time fsz-12px text-uppercase color-999">
+                                                        Ngày: @item.DateCmt.Value.ToString("dd-MM-yyyy") vào @item.DateCmt.Value.ToString("hh-mm")
+                                                    </span>
+                                                </div>
+                                                <div class="text color-666 fsz-12px mt-10">
+                                                    @item.Detail
+                                                </div>
+                                                <div class="reply">
+                                                    <a href="/course/downloadfile?file=@item.File">
+                                                        <i class="fa fa-file-word-o fa-fw"></i> @item.File
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @if (item.RepDate != null)
+                                        {
+                                            <div class="d-flex comment-replay ps-5 mt-30 ms-4">
+                                                <div class="inf w-100">
+                                                    <div class="title d-flex justify-content-between">
+                                                        <h6 class="fw-bold fsz-14px">Giảng viên: @item.Session.Course.Teacher.FullName</h6>
+                                                        <span class="time fsz-12px text-uppercase color-999">
+                                                            Ngày: @item.RepDate.Value.ToString("dd-MM-yyyy") vào @item.RepDate.Value.ToString("hh-mm")
+                                                        </span>
+                                                        <h6> Điểm: @item.Score</h6>
+                                                    </div>
+                                                    <div class="text color-666 fsz-12px mt-10">
+                                                        @item.Comment
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                                <form class="comment-form d-block pt-30" action="@Url.Action("AddHomework", "Course")" enctype="multipart/form-data" method="post">
+                                    <p class="text-uppercase mb-30">Nộp bài tập về nhà</p>
+                                    <div class="row">
+                                        <label style="margin-right: 20px; margin-left: 15px">File bài tập: </label>
+                                        <input type="file" id="File" name="File" accept=".doc, .docx, .pdf" required>
+                                        <div class="col-lg-12">
+                                            <div class="form-group mb-30">
+                                                <textarea class="form-control rounded-0 fsz-12px p-3" name="Detail" rows="6" placeholder="Nội dung"></textarea>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="IDSession" value="@ChiTietBaiGiang.ID">
+                                        <input type="hidden" name="IDUser" value="@user.ID">
+                                        <input type="submit" class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" value="nộp bài">
+                                    </div>
+                                </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ====== end comments ====== -->
+    <!-- ====== start modals ====== -->
+    <!-- ====== end modals ====== -->
+
+</main>
+<!-- Main End-->

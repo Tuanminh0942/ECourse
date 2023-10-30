@@ -1,0 +1,88 @@
+﻿@model WebApplication1.Models.Course
+
+@{
+    ViewBag.Title = "Sửa thông tin khóa học";
+    Layout = "~/Areas/GiangVien/Views/Shared/SharedLayoutTeacher.cshtml";
+}
+
+@using (Html.BeginForm("Update", "Course", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Sửa thông tin khóa học</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <form role="form">
+                                        <div class="form-group">
+                                            @Html.HiddenFor(model => model.ID)
+                                            <label>Tiêu đề</label>
+                                            @Html.EditorFor(model => model.Titles, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Nội dung</label>
+                                            <textarea name="Description" class="form-control" id="text_Description">@Model.Description </textarea>
+                                            @*@Html.EditorFor(model => model.Description, new { htmlAttributes = new { id = "text_Description", @class = "form-control" } })*@
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Phân loại</label>
+                                            <select name="IDCategory">
+                                                @foreach (var item in new WebApplication1.Models.DAO.CategoryDao().DanhSach())
+                                                {
+                                                    <option value="@item.ID">@item.CategoryName</option>
+                                                }
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Hình Ảnh</label>
+                                            @if (Model.Images != null)
+                                            {
+                                                <img src="~/Assets/img/Course/@Model.Images" style=" margin-left: 15px" width="150px" />
+                                            }
+                                            <img id="blah" src="#" alt="your image" style=" margin-left: 15px" width="100px" />
+                                            <input style="margin-top: 15px" name="Images" type="file" onchange="readURL(this)">
+                                        </div>
+                                        <input type="submit" value="Lưu" class="btn btn-default" />
+                                        <button type="reset" class="btn btn-default">Đặt lại</button>
+                                        <button class="btn btn-default" onclick="location.href='/Admin/Teacher/Index'">Quay lại</button>
+
+                                    </form>
+                                </div>
+                                <!-- /.col-lg-6 (nested) -->
+                                <!-- /.col-lg-6 (nested) -->
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /#page-wrapper -->
+
+    <!-- /#wrapper -->
+
+}
+@section Ckeditor{
+    <script>
+        CKEDITOR.replace("text_Description")
+    </script>
+    }
+

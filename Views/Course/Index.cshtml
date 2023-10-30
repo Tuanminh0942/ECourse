@@ -1,0 +1,107 @@
+﻿
+    @{
+        List<List<string>> KhoaHoc = (List<List<string>>)ViewBag.KhoaHoc;
+        
+        ViewBag.Active = 3;
+        ViewBag.Title = "Course";
+        Layout = "~/Views/Shared/SharedLayout.cshtml";
+    }
+
+    <!-- Header Start -->
+    <div class="container-fluid page-header" style="margin-bottom: 90px;">
+        <div class="container">
+            <div class="d-flex flex-column justify-content-center" style="min-height: 300px">
+                <h3 class="display-4 text-white text-uppercase">KHÓA HỌC</h3>
+                <div class="d-inline-flex text-white">
+                    <p class="m-0 text-uppercase"><a class="text-white" href="~/Home">Trang chủ</a></p>
+                    <i class="fa fa-angle-double-right pt-1 px-3"></i>
+                    <p class="m-0 text-uppercase">Khóa học</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+    <!-- Category Start -->
+    <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <div class="text-center mb-5">
+                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">CHỦ ĐỀ</h5>
+                <h1>Khám phá từng khóa học theo chủ đề</h1>
+            </div>
+            <div class="row">
+                @{ 
+                    foreach (var item in ViewBag.Categories)
+                    {
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="cat-item position-relative overflow-hidden rounded mb-2">
+                              <img class="img-fluid" src="~/Assets/img/@(item.Images)" alt="">
+                                  <a class="cat-overlay text-white text-decoration-none" href="@Url.Action("Index", "Course", new {CategoryID = item.ID})">
+                                      <h4 class="text-white font-weight-medium">@item.CategoryName</h4>
+                                  </a>
+                            </div>
+                        </div>
+                    }
+                                
+                }
+            </div>
+        </div>
+    </div>
+    <!-- Category Start -->
+    <!-- Courses Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="text-center mb-5">
+                <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Khóa học</h5>
+                <h1>Danh sách khóa học</h1>
+            </div>
+            <div class="row">
+                @{
+                    foreach (var item in KhoaHoc)
+                    {
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="rounded overflow-hidden mb-2">
+                        <img class="img-thumbnail" style=" height: 270px; width: 100%; object-fit: cover" src="~/Assets/img/Course/@item[1]" alt="">
+                        <div class="bg-secondary p-4">
+                            <a class="h5" href="@Url.Action("Details", "Course", new {ID = item[4]} )">@item[0]</a>
+                            <h4>@item[3]</h4>
+                            <div class="border-top mt-4 pt-4">
+                                <div class="d-flex justify-content-between">
+                                    <h5 class="m-0">@item[2]</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    }
+                }
+            </div>
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    @{
+                        var currentRouteValues = new RouteValueDictionary(Url.RequestContext.RouteData.Values);
+                        var queryString = Request.QueryString;
+                        foreach (var key in queryString.AllKeys)
+                        {
+                            currentRouteValues.Add(key, queryString[key]);
+                        }
+                        int CurrentPage = 1;
+                        if (Request.QueryString["Page"] != null)
+                        {
+                            CurrentPage = int.Parse(Request.QueryString["Page"]);
+                        }
+                        int TotalPage = (int)ViewBag.TotalPage;
+                        for (int i = 1; i <= TotalPage; i++)
+                        {
+                            currentRouteValues["Page"] = i;
+                            <li class="page-item @(CurrentPage == i?"active": "")"><a class="page-link" href="@Url.RouteUrl(currentRouteValues)">@i</a></li>
+                        }
+                    }
+
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="pagination">
+        
+    </div>
+    <!-- Courses End -->

@@ -1,0 +1,57 @@
+﻿@model WebApplication1.Models.Session
+
+@{
+    ViewBag.Title = "Chi tiết bài giảng";
+    Layout = "~/Areas/GiangVien/Views/Shared/SharedLayoutTeacher.cshtml";
+}
+
+<<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Chi tiết bài học</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        @using (Html.BeginForm("Detail", "Session"))
+                        {
+                            <input type="hidden" name="ID" value="@Model.ID" />
+                            <input type="hidden" name="Course_ID" value="@Model.courseID" />
+                            <div class="form-group col-lg-6">
+                                <label>Tên bài giảng</label>
+                                @Html.DisplayFor(model => model.Titles)
+                            </div>
+                            <div class="form-group col-lg-12">
+                                <label>Video bài giảng</label>
+                                <div class="single-post-wrap">
+                                    <iframe width="920" height="473" src=@Model.Link title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                            <div class="form-group col-lg-12">
+                                <label>Nội dung </label>
+                                <textarea readonly class="form-control" id="text_Description">@Model.Description</textarea>
+                            </div>
+                            <div class="form-group col-lg-12">
+                                <label>File bài luận</label>
+                                <p>Tải file bài tập: <a href="/course/downloadfile?file=@Model.File">@Model.File</a></p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Ckeditor{
+    <script>
+        CKEDITOR.replace("text_Description")
+    </script>
+    }

@@ -1,0 +1,78 @@
+﻿@model WebApplication1.Models.Teacher
+
+@{
+    ViewBag.Title = "AddGV";
+    Layout = "~/Areas/Admin/Views/Shared/SharedLayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Thêm mới giảng viên</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <form role="form">
+                                        <div class="form-group">
+                                            <label>Họ và Tên</label>
+                                            @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                                            
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                            
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Mật khẩu</label>
+                                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                                            
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Địa chỉ</label>
+                                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
+                                            
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Số điện thoại</label>
+                                            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                                            
+                                        </div>
+                                        <button type="submit" value="Tạo" class="btn btn-default">Tạo</button>
+                                        <button class="btn btn-default" onclick="location.href='/Admin/Teacher/Index'">Quay lại</button>
+
+                                    </form>
+                                </div>
+                                <!-- /.col-lg-6 (nested) -->
+                                <!-- /.col-lg-6 (nested) -->
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /#page-wrapper -->
+
+    <!-- /#wrapper -->
+
+}
+

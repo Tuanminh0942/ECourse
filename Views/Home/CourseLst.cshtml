@@ -1,0 +1,63 @@
+﻿@model IEnumerable<WebApplication1.Models.Join>
+
+@{
+    ViewBag.Title = "CourseLst";
+    Layout = "~/Views/Shared/SharedLayout.cshtml";
+}
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <thead>
+                                    <tr>
+                                        <th>Số thứ tự</th>
+                                        <th>Tiêu đề khóa học</th>>
+                                        <th>Hình ảnh</th>
+                                        <th>Số bài giảng</th>
+                                        <th>Ngày tham gia</th>
+                                        <th>Phân loại</th>
+                                        <th>Hủy khóa học</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{ int i = 1;
+                                        foreach (var item in Model)
+                                        {
+                                                <tr class="odd gradeX">
+                                                    <td>@i</td>
+                                                    <td><a href="@Url.Action("Details", "Course", new {ID = item.IDCourse} )">@item.Course.Titles</a></td>
+                                                    <td><img src="~/Assets/img/Course/@item.Course.Images" width="100px" /></td>
+                                                    <td>@item.Course.Sessions.Count(x => x.courseID == item.IDCourse)</td>
+                                                    <td>@item.Date.ToString("dd-MM-yyyy")</td>
+                                                    <td>@item.Course.Category.CategoryName</td>
+                                                    <td style="text-align:center; vertical-align: middle;" class="center">
+                                                        <button class="btn btn-info btnDelete" data-id="@item.ID" title="Hủy tham gia" onclick="if (confirm('Bạn có chắc chắn muốn hủy tham gia khóa học này không')) { location.href= '/Home/Delete?id=@item.IDCourse ' }">
+                                                            <i class="fa fa-close fa-fw"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            i++;
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

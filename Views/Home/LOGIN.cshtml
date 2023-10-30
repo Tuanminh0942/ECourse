@@ -1,0 +1,49 @@
+﻿@model WebApplication1.Models.LoginModel
+@{
+    ViewBag.Title = "LOGIN";
+    Layout = "~/Views/Shared/SharedLayout.cshtml";
+}
+<section class="vh-100 bg-image" style=" margin-top: 10px">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div class="card" style="border-radius: 15px;">
+                        <div class="card-body p-5">
+                            <h2 class="text-uppercase text-center mb-5">Đăng nhập</h2>
+                            @using (Html.BeginForm("LOGIN", "Home", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(false, "", new { @class = "text-danger" });
+                                <!-- Email input -->
+                                <div class="form-outline mb-4">
+                                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @placeholder = "Email", @autofocus = "autofocus" })
+                                </div>
+                                <!-- Password input -->
+                                <div class="form-outline mb-4">
+                                    @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @placeholder = "Password", @type = "password" })
+                                </div>
+                                <!-- 2 column grid layout for inline styling -->
+                                <div class="row mb-4">
+                                    <div class="col d-flex justify-content-center">
+                                        <!-- Checkbox -->
+                                        <div class="col-lg-12" style="font-size: 13px; height: 40px">
+                                            <input type="checkbox" name="Teacher" value="true">
+                                            Đăng nhập tài khoản giáo viên
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Submit button -->
+                                <button type="submit" class="btn btn-primary btn-block mb-4">Đăng nhập</button>
+                                <!-- Register buttons -->
+                                <div class="text-center">
+                                    <p>Chưa có tài khoản? <a href="~/Home/Register">Đăng ký</a></p>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

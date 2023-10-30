@@ -1,0 +1,66 @@
+﻿@model WebApplication1.Areas.Admin.Model.LoginModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+        <meta charset="utf-8">
+        <title>Đăng nhập</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="Free HTML Templates" name="keywords">
+        <meta content="Free HTML Templates" name="description">
+
+        <!-- Favicon -->
+        <link href="img/favicon.ico" rel="icon">
+
+        <!-- Icon -->
+        <link href="~/Assets/css/font-awesome.min.css" rel="stylesheet" />
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+        <!-- Font Awesome -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+        <!-- Libraries Stylesheet -->
+        <link href="~/Assets/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="~/Assets/css/style.css" rel="stylesheet" />
+</head>
+<body>
+    <section class="vh-100 bg-image" style=" margin-top: 10px">
+        <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+            <div class="container h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                        <div class="card" style="border-radius: 15px;">
+                            <div class="card-body p-5">
+                                <h2 class="text-uppercase text-center mb-5">Đăng nhập</h2>
+                                @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(false, "", new { @class = "text-danger" });
+                                        <!-- Email input -->
+                                        <div class="form-outline mb-4">
+                                            @Html.TextBoxFor(model => model.Email, new {@class ="form-control", @placeholder = "Email", @autofocus ="autofocus"})
+                                        </div>
+                                        <!-- Password input -->
+                                        <div class="form-outline mb-4">
+                                            @Html.TextBoxFor(model => model.Password, new {@class = "form-control", @placeholder = "Password", @type = "password"})
+                                        </div>
+                                        <!-- Submit button -->
+                                        <button type="submit" class="btn btn-primary btn-block mb-4">Đăng nhập</button>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

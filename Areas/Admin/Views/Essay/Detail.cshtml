@@ -1,0 +1,85 @@
+﻿@model WebApplication1.Models.Essay
+
+@{
+    ViewBag.Title = "Bài làm của học viên";
+    Layout = "~/Areas/Admin/Views/Shared/SharedLayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Chấm bài tập về nhà</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3> @Model.Session.Titles</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <form role="form">
+                                        <div class="form-group">
+                                            @Html.HiddenFor(model => model.ID)
+                                            <div class="form-outline mb-4">
+                                                <label>Họ và tên:</label>
+                                                @Html.DisplayFor(model => model.User.FullName)
+                                            </div>
+                                            <div class="form-outline mb-4">
+                                                <label>Khóa học</label>
+                                                @Html.DisplayFor(model => model.Session.Course.Titles)
+                                            </div>
+                                            <div class="form-outline mb-4">
+                                                <label>Bài học</label>
+                                                @Html.DisplayFor(model => model.Session.Titles)
+                                            </div>
+                                            <label>File bài tập</label>
+                                            <a href="/course/downloadfile?file=@Model.File">@Model.File</a>
+                                            <div class="form-outline mb-4">
+                                                <label>Ngày nộp</label>
+                                                @Html.DisplayFor(model => model.DateCmt)
+                                            </div>
+                                            <label>Điểm</label>
+                                            @Html.DisplayFor(model => model.Score, new { htmlAttributes = new { @class = "form-control" } })
+
+                                            <div class="form-group">
+                                                <label>Đánh giá</label>
+                                                <textarea readonly id= "text_Description" class="form-control" >@Model.Comment</textarea>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                                <!-- /.col-lg-6 (nested) -->
+                                <!-- /.col-lg-6 (nested) -->
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /#page-wrapper -->
+    <!-- /#wrapper -->
+
+
+}
+@section Ckeditor{
+    <script>
+        CKEDITOR.replace("text_Description")
+    </script>
+}
